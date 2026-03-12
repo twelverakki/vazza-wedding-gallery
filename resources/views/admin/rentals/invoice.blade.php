@@ -3,8 +3,57 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invoice {{ $rental->code }}</title>
     <style>
+        /* ─── PRINT BUTTON (hidden when printing) ──────────────── */
+        @media print {
+            .no-print { display: none !important; }
+            body { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+        }
+
+        .print-bar {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 9999;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-print {
+            background: #0d1f35;
+            color: #fff;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+            transition: background 0.2s;
+        }
+
+        .btn-print:hover { background: #1a3a5c; }
+
+        .btn-back {
+            background: #fff;
+            color: #374151;
+            border: 1.5px solid #d1d5db;
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
         /* ─── PAGE SETUP ───────────────────────────────────────────── */
         @page {
             size: A4 portrait;
@@ -431,6 +480,18 @@
 </head>
 
 <body>
+
+    {{-- ─── PRINT BUTTON BAR (hidden on print) ────── --}}
+    <div class="print-bar no-print">
+        <a href="javascript:history.back()" class="btn-back">← Kembali</a>
+        <button class="btn-print" onclick="window.print()">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/>
+            </svg>
+            Print / Save PDF
+        </button>
+    </div>
 
     {{-- ─── HEADER ──────────────────────────────────────────── --}}
     <div class="header">

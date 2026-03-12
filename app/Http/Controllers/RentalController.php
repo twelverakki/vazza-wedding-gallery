@@ -788,11 +788,8 @@ class RentalController extends Controller
     {
         $rental->load(['items.product', 'fines', 'customer']);
 
-        $pdf = \Barryvdh\DomPDF\Facade\Pdf::loadView('admin.rentals.invoice', compact('rental'))
-            ->setPaper('a4', 'portrait');
-
-        // stream() = preview di browser (bukan force download)
-        return $pdf->stream("invoice-{$rental->code}.pdf");
+        // Render as printable HTML page (no DomPDF required)
+        return view('admin.rentals.invoice', compact('rental'));
     }
 
     // --- AI INVOICE GENERATION ---
