@@ -498,7 +498,7 @@
         <div class="header-left">
             <div class="header-logo-row">
                 <div class="header-logo-cell">
-                    <img src="{{ public_path('storage/bg/logo-white.png') }}" alt="Vazza Wedding Gallery">
+                    <img src="{{ asset('storage/bg/logo-white.png') }}" alt="Vazza Wedding Gallery">
                 </div>
             </div>
 
